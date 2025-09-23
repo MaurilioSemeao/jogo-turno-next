@@ -21,18 +21,18 @@ export default function useGameManager(){
         setLog(prev => [...prev, mensagem])
     }
 
-    const acoes ={
+    const acoesHeroi ={
         atacar: () => {
-            modificarVida("vialo", -10)
-            adicionarLog(`${heroi.nome} atacou ${vialo.nome} e causou 10 de dano`)
+            modificarVida("vilao", 10)
+            adicionarLog(`${heroi.nome} atacou ${vilao.nome} e causou 10 de dano`)
         },
         defender: () =>{
             modificarVida("heroi", -5)
-            adicionarLog(`${heroi.nome} atacou ${vialo.nome} e causou apenas 5 de dano`)
+            adicionarLog(`${heroi.nome} Defendeu o atque de ${vilao.nome} e recuperou 5 de vida`)
         },
 
         usarPocao: () =>{
-            modificarVida("heroi", 15)
+            modificarVida("heroi", -15)
             adicionarLog(`${heroi.nome} usou poção e recuperou 15 de vida`)
         },
 
@@ -43,15 +43,48 @@ export default function useGameManager(){
 
     }
 
+
+    const acaoVilao = {
+        atacar : () =>{
+            modificarVida("heroi", 10)
+            adicionarLog(`${vilao.nome } atacou ${heroi.nome} e causou10 de dano`)
+        },
+        furia: () =>{
+            modificarVida("heroi", 15)
+            adicionarLog(`${vilao.nome } atacou ${heroi.nome} em modo furia causou 20 de dano`)
+        },
+        regenera: () =>{
+            modificarVida("vilao", -5)
+            adicionarLog(`${vilao.nome } Recuperou 5 de vida`)
+
+        }
+    }
+    const handleAcaoVilao = () =>{
+        const randoAcao = Math.floor(Math.random() * 3) +1;
+
+        switch (randoAcao) {
+            case 1:
+                return "atacar";
+
+            case 2:
+                return "furia";
+
+            case 3:
+                return"regenera";
+        }
+    }
+
     const handlerAcaoHeroi = (acao) =>{
         if(!turnoHeroi) return
-        acoes[acao]?.()
+        acoesHeroi[acao]?.()
         setTurnoHeroi( false)
 
         setTimeout( () =>{
-
+            acaoVilao[handleAcaoVilao()]?.()
             setTurnoHeroi( true)
-        }, 1000)
+        }, 2000)
+
+
     }
 
     return{
