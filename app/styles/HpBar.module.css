@@ -1,0 +1,28 @@
+.container {
+    position: relative;
+    margin-bottom: 5px;
+    width: 90px;
+    height: 22px;
+    border: 2px solid #ffffff;
+    border-radius: 6px;
+    background: #8f8c8c;
+    overflow: hidden;
+}
+
+.fill {
+    height: 100%;
+    background: #f35757;
+    transition: width 0.3s ease;
+}
+
+.label {
+    position: absolute;
+    width: 100%;
+    text-align: center;
+    top: 0;
+    left: 0;
+    font-size: 12px;
+    font-weight: bold;
+    color: white;
+    line-height: 18px;
+}

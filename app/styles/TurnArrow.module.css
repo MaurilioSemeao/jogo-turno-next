@@ -1,0 +1,22 @@
+.turnIndicate{
+    position: absolute;
+
+    left: 0;
+    width: 5%;
+}
+
+.coin{
+    font-size: 32px;
+    position: absolute;
+    left: 82px;
+    transition: transform 0.5s ease-in-out;
+
+}
+
+.coin.left{
+    transform: translateX(0%);
+}
+
+.coin.right{
+    transform: translateX(calc(780px - 86px));
+}
