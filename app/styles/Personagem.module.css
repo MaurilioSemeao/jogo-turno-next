@@ -1,0 +1,32 @@
+.person{
+    position: absolute;
+    bottom: 86px;
+    width: 88px;
+    text-align: center;
+    transition: left 0.14s linear, transform 0.12s;
+}
+
+.Sora{
+    left: 56px;
+}
+
+.move {
+    right: 56px;
+    transition: left 0.14s linear, transform 0.12s;
+}
+
+.Riku{
+    right: 56px;
+}
+
+.sprite{
+    background: rgba(255,255,255, 0.95);
+    width: 88px;
+    height: 88px;
+    line-height: 88px;
+    font-size: 40px;
+    border-radius: 8px;
+    display: inline-block;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+
+}

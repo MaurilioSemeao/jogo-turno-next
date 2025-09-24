@@ -10,7 +10,10 @@ export default function Home() {
       vilao,
       log,
       turnoHeroi,
-      handlerAcaoHeroi} = useGameManager();
+      endGame,
+      handlerAcaoHeroi
+
+  } = useGameManager();
 
   return (
 
@@ -19,6 +22,7 @@ export default function Home() {
           vilao={vilao}
           log={log}
           turnoHeroi={turnoHeroi}
+          endGame={endGame}
           handlerAcaoHerois={handlerAcaoHeroi}
       />
       //<div className={styles.page}>

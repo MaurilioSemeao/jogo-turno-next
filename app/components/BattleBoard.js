@@ -2,37 +2,37 @@
 import styles from "../styles/BattleBoard.module.css"
 import HpBar from "@/app/components/HpBar";
 import TurnArrow from "@/app/components/TurnArrow";
+import GameOverModal from "@/app/components/GameOverModal";
+import Personagem from "@/app/components/Personagem";
 
 export default function BattleBoard( props ) {
     return(
         <div className={styles.wrapper}>
             <h3>⚔️ Tabuleiro</h3>
-            <div className={styles.controls}>
-                <button onClick={() => props.handlerAcaoHerois("atacar")} >⚔️</button>
-                <button onClick={() => props.handlerAcaoHerois("defender")} >🛡️</button>
-                <button onClick={() => props.handlerAcaoHerois("usarPocao")} >🧪</button>
-                <button onClick={() => props.handlerAcaoHerois("correr")} >🏃</button>
-            </div>
 
-            <div className={styles.board} >
+            <div className={styles.cotprimary}>
+                <div className={styles.controls}>
+                    <button onClick={() => props.handlerAcaoHerois("atacar")} >⚔️</button>
+                    <button onClick={() => props.handlerAcaoHerois("defender")} >🛡️</button>
+                    <button onClick={() => props.handlerAcaoHerois("usarPocao")} >🧪</button>
+                    <button onClick={() => props.handlerAcaoHerois("correr")} >🏃</button>
+                </div>
 
-                <TurnArrow isActive={props.turnoHeroi} />
+                <div className={styles.board} >
 
-                <div className={styles.ground} >
+                    <TurnArrow isActive={props.turnoHeroi} />
+                    <Personagem personagem={props.heroi} />
+                    <Personagem personagem={props.vilao} />
 
-                  <div className={styles.heroi} >
-                      <HpBar hp={props.heroi.vida} maxHp={100} />
-                      <div className={styles.sprite} >{props.heroi.nome}</div>
-                  </div>
 
-                    <div className={styles.vilao}>
-                        <HpBar hp={props.vilao.vida} maxHp={100} />
-                        <div className={styles.sprite} >{props.vilao.nome}</div>
+                    <div className={styles.ground} >
+
                     </div>
 
+                    <GameOverModal endGame={props.endGame}/>
                 </div>
-            </div>
 
+            </div>
 
 
             <div className={styles.log}>

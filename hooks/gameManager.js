@@ -100,10 +100,12 @@ export default function useGameManager(){
         if(heroi.vida < 0){
             console.log(heroi.nome + " perdeu")
             setEndGame(true)
+            return
         }
         if(vilao.vida < 0){
             console.log(vilao.nome + " perdeu")
             setEndGame(true)
+            return
         }
     },1000)
 
