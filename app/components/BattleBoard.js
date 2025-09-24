@@ -29,7 +29,10 @@ export default function BattleBoard( props ) {
 
                     </div>
 
-                    <GameOverModal endGame={props.endGame}/>
+                    <GameOverModal
+                        endGame={props.endGame}
+                        handlerEndGame={props.handlerEndGame}
+                    />
                 </div>
 
             </div>

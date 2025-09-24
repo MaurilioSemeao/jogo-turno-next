@@ -3,8 +3,8 @@
 import { useState } from "react";
 
 export default function useGameManager(){
-    const heroiInicial = {vida: 20, nome: "Sora"}
-    const vilaoInicial = {vida: 20, nome: "Riku"}
+    const heroiInicial = {vida: 100, nome: "Sora"}
+    const vilaoInicial = {vida: 100, nome: "Riku"}
 
     const [heroi, setHeroi] = useState(heroiInicial)
     const [vilao, setVilao] = useState(vilaoInicial)
@@ -91,8 +91,13 @@ export default function useGameManager(){
 
     }
 
-    const handleEndGame =() =>{
-
+    const handlerEndGame =() =>{
+        setHeroi(heroiInicial)
+        setVilao(vilaoInicial)
+        setLog([])
+        setTurnoHeroi(true)
+        setTurno(prev => 1)
+        setEndGame(false)
     }
 
 
@@ -115,7 +120,8 @@ export default function useGameManager(){
         log,
         turnoHeroi,
         endGame,
-        handlerAcaoHeroi
+        handlerAcaoHeroi,
+        handlerEndGame
     }
 
 }

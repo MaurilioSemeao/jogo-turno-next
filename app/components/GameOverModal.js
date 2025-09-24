@@ -1,6 +1,6 @@
 import styles from "../styles/GameOverModal.module.css"
 
-export default function GameOverModal({endGame}){
+export default function GameOverModal({endGame, handlerEndGame}) {
     if(!endGame) return null;
 
     return (
@@ -8,7 +8,9 @@ export default function GameOverModal({endGame}){
             <div className={styles.modal}>
                 <h2>Fim de Jogo!</h2>
                 <p> perdeu!</p>
-                <button  className={styles.button}>Jogar Novamente</button>
+                <button onClick={() => handlerEndGame()}
+                        className={styles.button}>Jogar Novamente
+                </button>
             </div>
         </div>
     );
