@@ -38,8 +38,8 @@ export default function BattleBoard( props ) {
             <div className={styles.log}>
                 <h4>Registro</h4>
                 <ul>
-                    { props.log.slice().reverse().map((l, i) => (
-                        <li key={i}>{l}</li>
+                    { props.log.map((l, i) => (
+                        <li className={styles[l.quem === "Sora" ? "h" : "v"]} key={i} ><span>Turno {l.turno}</span>{l.mensagem}</li>
                     )) }
                 </ul>
             </div>

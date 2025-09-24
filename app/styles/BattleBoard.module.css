@@ -130,15 +130,18 @@
     border: 1px solid burlywood;
     padding: 5px;
     border-radius: 8px;
-    background: linear-gradient(180deg, #bfe99f 0%, #212e16 60%);
 }
 
-.logH{
+.log span{
+    margin-right: 10px;
+}
+
+.h{
     background: linear-gradient(180deg, #bfe99f 0%, #212e16 60%);
 
 }
 
-.logV{
+.v{
     background: linear-gradient(180deg, #ff84d2 0%, #4a2235 60%);
 
 }
