@@ -49,9 +49,7 @@ export default function BattleBoard( props ) {
                             player={vilao}
                         />
                     </div>
-                    {setInterval( ()=>{
 
-                    },1000)}
                     <GameOverModal
                         endGame={props.endGame}
                         handlerEndGame={props.handlerEndGame}
