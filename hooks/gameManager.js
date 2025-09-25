@@ -4,7 +4,7 @@ import { useState } from "react";
 
 export default function useGameManager(){
     const heroiInicial = {vida: 100, nome: "Sora"}
-    const vilaoInicial = {vida: 100, nome: "Riku"}
+    const vilaoInicial = {vida: 20, nome: "Riku"}
 
     const [heroi, setHeroi] = useState(heroiInicial)
     const [vilao, setVilao] = useState(vilaoInicial)
@@ -15,10 +15,17 @@ export default function useGameManager(){
     const [turno, setTurno] = useState(1)
     const [endGame, setEndGame] = useState(false)
 
-    const modificarVida = (alvo, dano) =>{
-        const setter = alvo === "heroi" ? setHeroi : setVilao;
-        setter(prev =>({...prev, vida: prev.vida - dano}))
-    }
+    const modificarVida = (alvo, dano) => {
+        if (alvo === "heroi") {
+            const novaVida = Math.max(heroi.vida - dano, 0);
+            setHeroi({ ...heroi, vida: novaVida });
+            return novaVida;
+        } else {
+            const novaVida = Math.max(vilao.vida - dano, 0);
+            setVilao({ ...vilao, vida: novaVida });
+            return novaVida;
+        }
+    };
 
     const adicionarLog = (mensagem, quem) => {
         setLog(prev => [{mensagem, turno, quem}, ...prev])
@@ -26,22 +33,23 @@ export default function useGameManager(){
 
     const acoesHeroi ={
         atacar: () => {
-            modificarVida("vilao", 10)
+
             adicionarLog(`${heroi.nome} atacou ${vilao.nome} e causou 10 de dano`, `${heroi.nome}`)
+            return modificarVida("vilao", 10)
         },
         defender: () =>{
-            modificarVida("heroi", -5)
             adicionarLog(`${heroi.nome} Defendeu o atque de ${vilao.nome} e recuperou 5 de vida`,`${heroi.nome}`)
+            return  modificarVida("heroi", -5)
         },
 
         usarPocao: () =>{
-            modificarVida("heroi", -15)
             adicionarLog(`${heroi.nome} usou poção e recuperou 15 de vida`,`${heroi.nome}`)
+            return modificarVida("heroi", -15)
         },
 
         correr: () =>{
             adicionarLog(`${heroi.nome} tentou fugir!`,`${heroi.nome}`)
-            alert("Fim de jogo!")
+            return 0;
         }
 
     }
@@ -49,16 +57,16 @@ export default function useGameManager(){
 
     const acaoVilao = {
         atacar : () =>{
-            modificarVida("heroi", 10)
             adicionarLog(`${vilao.nome } atacou ${heroi.nome} e causou10 de dano`,`${vilao.nome}`)
+            return modificarVida("heroi", 10)
         },
         furia: () =>{
-            modificarVida("heroi", 15)
             adicionarLog(`${vilao.nome } atacou ${heroi.nome} em modo furia causou 20 de dano`,`${vilao.nome}`)
+            return modificarVida("heroi", 15)
         },
         regenera: () =>{
-            modificarVida("vilao", -5)
             adicionarLog(`${vilao.nome } Recuperou 5 de vida`,`${vilao.nome}`)
+            return modificarVida("vilao", -5)
 
         }
     }
@@ -77,15 +85,27 @@ export default function useGameManager(){
         }
     }
 
+    const checkEndGame = (valorVida) =>{
+        if (valorVida <= 0){
+            setEndGame(true)
+            return true;
+        }
+        return false;
+    }
+
     const handlerAcaoHeroi = (acao) =>{
         if(!turnoHeroi) return
-        acoesHeroi[acao]?.()
+        const vidaVilao = acoesHeroi[acao]?.()
+        if(checkEndGame(vidaVilao)) return
         setTurnoHeroi( false)
 
         setTimeout( () =>{
-            acaoVilao[handleAcaoVilao()]?.()
+
+            const vidaHeroi = acaoVilao[handleAcaoVilao()]?.()
             setTurnoHeroi( true)
             setTurno(prev => prev + 1)
+
+            if(checkEndGame(vidaHeroi)) return
         }, 2000)
 
 
@@ -101,18 +121,7 @@ export default function useGameManager(){
     }
 
 
-    setTimeout(()=>{
-        if(heroi.vida < 0){
-            console.log(heroi.nome + " perdeu")
-            setEndGame(true)
-            return
-        }
-        if(vilao.vida < 0){
-            console.log(vilao.nome + " perdeu")
-            setEndGame(true)
-            return
-        }
-    },1000)
+
 
     return{
         heroi,

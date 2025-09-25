@@ -1,6 +1,6 @@
 .person{
     position: absolute;
-    bottom: 86px;
+    bottom: 46px;
     width: 88px;
     text-align: center;
     transition: left 0.14s linear, transform 0.12s;
@@ -19,14 +19,12 @@
     right: 56px;
 }
 
-.sprite{
-    background: rgba(255,255,255, 0.95);
-    width: 88px;
-    height: 88px;
-    line-height: 88px;
-    font-size: 40px;
-    border-radius: 8px;
-    display: inline-block;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.12);
+.imgbase{
+    width: 100px;
+    height: 100px;
 
+}
+
+.img{
+    transform: scaleX(-1);
 }
